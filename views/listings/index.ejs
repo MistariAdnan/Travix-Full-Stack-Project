@@ -1,0 +1,233 @@
+<% layout("layouts/boilerplate") %>
+
+<style>
+#top-bar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+    margin:20px 0;
+}
+
+.filter-btn{
+    border:1px solid #eee;
+    padding:12px 18px;
+    border-radius:16px;
+    background:white;
+    cursor:pointer;
+    transition:0.3s;
+    text-align:center;
+    min-width:100px;
+    text-decoration:none;
+    color:black;
+}
+
+.filter-btn:hover,
+.filter-btn.active{
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.08);
+    border-color:#ff385c;
+}
+
+.filter-btn i{
+    display:block;
+    font-size:18px;
+    margin-bottom:5px;
+    color:#ff385c;
+}
+
+.filter-btn p{
+    margin:0;
+    font-size:14px;
+    font-weight:500;
+}
+
+.sort-box{
+    margin-left:auto;
+    min-width:180px;
+}
+
+.listing-link{
+    text-decoration:none;
+    color:black;
+}
+
+.listing-card{
+    border:none !important;
+    transition:0.3s;
+}
+
+.listing-card:hover{
+    transform:translateY(-6px);
+}
+
+.listing-card img{
+    border-radius:20px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:10px 4px !important;
+}
+
+.card-title{
+    font-weight:700;
+    margin-bottom:4px;
+}
+
+.card-meta{
+    color:#666;
+    font-size:14px;
+}
+
+.price{
+    font-weight:700;
+}
+
+.badge-rating{
+    background:#fff;
+    border-radius:20px;
+    padding:5px 10px;
+    position:absolute;
+    top:12px;
+    right:12px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.empty-box{
+    text-align:center;
+    padding:80px 20px;
+    border:1px dashed #ddd;
+    border-radius:20px;
+    margin-top:30px;
+}
+
+@media(max-width:768px){
+    #top-bar{
+        overflow-x:auto;
+        flex-wrap:nowrap;
+    }
+
+    .sort-box{
+        margin-left:0;
+    }
+}
+</style>
+
+<!-- TOP BAR -->
+<div id="top-bar">
+
+    <a href="/listings?search=Trending" class="filter-btn">
+        <i class="fa-solid fa-house-fire"></i>
+        <p>Trending</p>
+    </a>
+
+    <a href="/listings?search=Room" class="filter-btn">
+        <i class="fa-solid fa-bed"></i>
+        <p>Rooms</p>
+    </a>
+
+    <a href="/listings?search=Mountain" class="filter-btn">
+        <i class="fa-solid fa-mountain"></i>
+        <p>Mountain</p>
+    </a>
+
+    <a href="/listings?search=Pool" class="filter-btn">
+        <i class="fa-solid fa-water-ladder"></i>
+        <p>Pool</p>
+    </a>
+
+    <a href="/listings?search=Camping" class="filter-btn">
+        <i class="fa-solid fa-campground"></i>
+        <p>Camping</p>
+    </a>
+
+    <a href="/listings?search=City" class="filter-btn">
+        <i class="fa-solid fa-city"></i>
+        <p>Cities</p>
+    </a>
+
+    <!-- Sort -->
+    <form class="sort-box" method="GET" action="/listings">
+        <input type="hidden" name="search" value="<%= search || '' %>">
+
+        <select class="form-select" name="sort" onchange="this.form.submit()">
+           <option value="">Sort By</option>
+
+        <option value="low" <%= sort === "low" ? "selected" : "" %>>
+            Price Low → High
+        </option>
+
+        <option value="high" <%= sort === "high" ? "selected" : "" %>>
+            Price High → Low
+        </option>
+        </select>
+    </form>
+
+</div>
+
+<!-- EMPTY STATE -->
+<% if(allListing.length === 0){ %>
+
+<div class="empty-box">
+    <h4>No Properties Found</h4>
+    <p>Try searching another city, country or keyword.</p>
+    <a href="/listings" class="btn btn-danger rounded-pill px-4">Explore All</a>
+</div>
+
+<% } else { %>
+
+<!-- LISTINGS -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+
+<% for(let Listing of allListing){ %>
+
+<a href="/listings/<%= Listing._id %>" class="listing-link">
+
+<div class="card listing-card">
+
+    <div class="position-relative">
+
+        <img 
+            src="<%= Listing.image.url %>" 
+            class="card-img-top" 
+            style="height:270px;"
+            loading="lazy"
+        >
+
+        <div class="badge-rating">
+            ⭐
+            <%= Listing.reviews.length
+            ? (Listing.reviews.reduce((sum, review) => sum + review.rating, 0) / Listing.reviews.length).toFixed(1)
+            : "New" %>
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="card-title"><%= Listing.title %></div>
+
+        <div class="card-meta">
+            <%= Listing.location %>, <%= Listing.country %>
+        </div>
+
+        <div class="mt-1">
+            <span class="price">
+                ₹ <%= Listing.price ? Listing.price.toLocaleString("en-IN") : "N/A" %>
+            </span>
+            / night
+        </div>
+
+    </div>
+
+</div>
+
+</a>
+
+<% } %>
+
+</div>
+
+<% } %>
