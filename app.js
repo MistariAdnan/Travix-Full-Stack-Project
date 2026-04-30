@@ -7,11 +7,7 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const flash = require("connect-flash");
-// const wrapAsync = require("./utils/wrapAsync.js");
-// const { listingSchema, reviewSchema } = require("./schema.js");
-// const Review = require("./models/review.js");
-// const review = require("./models/review.js");
-// const Listing = require("./models/listing.js");
+
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
@@ -33,19 +29,6 @@ mongoose.connect(dbUrl)
 .catch((err) => {
     console.log(err);
 });
-//to call function
-main().then(() => {
-        console.log("connected to DB");
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-//databse k liyewrapAsync(
-async function main() {
-    await mongoose.connect(MONGO_URL);
-
-}
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -55,7 +38,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const sessionOptions = {
-    secret: "mysupersecretcode",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -64,9 +47,7 @@ const sessionOptions = {
         httpOnly: true,
     },
 };
-// app.get("/", (req, res) => {
-//     res.send("Hi,I am Root");
-// });
+
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -86,14 +67,7 @@ app.use((req, res, next) => {
     next();
 })
 
-// app.get("/demouser", async(req, res) => {
-//     let fakeUser = new User({
-//         email: "student@gmail.com",
-//         username: "sigma-student"
-//     });
-//     const registerdUser = await User.register(fakeUser, "hiWorld");
-//     res.send(registerdUser);
-// })
+
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
@@ -107,7 +81,8 @@ app.use((err, req, res, next) => {
     let { statusCode = 790, message = "kuch to gadbad he" } = err;
     res.status(statusCode).render("error.ejs", { message });
 });
-app.listen(8081, () => {
+const port = process.env.PORT || 8081;
 
-    console.log("server is listening to port 8081");
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
