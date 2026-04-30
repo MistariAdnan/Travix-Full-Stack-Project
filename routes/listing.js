@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-if (process.env.NODE_ENV != "production") {
-    require('dotenv').config();
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
 }
 
 const wrapAsync = require("../utils/wrapAsync.js");
@@ -15,7 +15,7 @@ const { storage } = require("../cloudconfig.js");
 const upload = multer({ storage });
 
 /* ===============================
-   🚀 FILTER ROUTE (MUST BE FIRST)
+   FILTER ROUTE
 ================================ */
 router.get("/filter", async (req, res) => {
 
@@ -29,7 +29,9 @@ router.get("/filter", async (req, res) => {
 
     let listings = await Listing.find(filter);
 
-    res.render("listings/index", { listings });
+    res.render("listings/index", {
+        allListing: listings   // ✅ FIXED
+    });
 });
 
 
@@ -40,7 +42,7 @@ router.route("/")
     .get(wrapAsync(listingController.index))
     .post(
         isLoggedIn,
-        upload.single('listing[image]'),
+        upload.single("image"),   // ✅ FIXED HERE
         validateListing,
         wrapAsync(listingController.createListing)
     );
@@ -60,7 +62,7 @@ router.route("/:id")
     .put(
         isLoggedIn,
         isOwner,
-        upload.single('listing[image]'),
+        upload.single("image"),   // ✅ FIXED HERE
         validateListing,
         wrapAsync(listingController.updateListing)
     )

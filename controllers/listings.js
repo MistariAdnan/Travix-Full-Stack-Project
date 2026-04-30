@@ -1,7 +1,7 @@
 const Listing = require("../models/listing.js");
 
 /* =========================
-   INDEX PAGE + SEARCH + SORT
+   INDEX + SEARCH + SORT
 ========================= */
 module.exports.index = async (req, res) => {
 
@@ -21,15 +21,12 @@ module.exports.index = async (req, res) => {
         };
     }
 
-    // BASE QUERY
-    let listingsQuery = Listing.find(query).populate("reviews");
+    let listingsQuery = Listing.find(query);
 
     // SORT LOGIC
     if (sort === "low") {
         listingsQuery = listingsQuery.sort({ price: 1 });
-    }
-
-    if (sort === "high") {
+    } else if (sort === "high") {
         listingsQuery = listingsQuery.sort({ price: -1 });
     }
 
@@ -58,14 +55,14 @@ module.exports.ShowListing = async (req, res) => {
 
     let { id } = req.params;
 
-    const listing = await Listing.findById(id)
-        .populate({
-            path: "reviews",
-            populate: {
-                path: "author",
-            },
-        })
-        .populate("owner");
+   const listing = await Listing.findById(id)
+    .populate({
+        path: "reviews",
+        populate: {
+            path: "author"
+        }
+    })
+    .populate("owner");
 
     if (!listing) {
         req.flash("error", "Requested Listing Does Not Exist!");
@@ -77,17 +74,27 @@ module.exports.ShowListing = async (req, res) => {
 
 
 /* =========================
-   CREATE LISTING
+   CREATE LISTING (SAFE)
 ========================= */
 module.exports.createListing = async (req, res, next) => {
     try {
-        let url = req.file.path;
-        let filename = req.file.filename;
 
         const newListing = new Listing(req.body.listing);
 
         newListing.owner = req.user._id;
-        newListing.image = { url, filename };
+
+        // SAFE IMAGE HANDLING
+        if (req.file) {
+            newListing.image = {
+                url: req.file.path,
+                filename: req.file.filename
+            };
+        } else {
+            newListing.image = {
+                url: "https://via.placeholder.com/400",
+                filename: "default"
+            };
+        }
 
         await newListing.save();
 
@@ -114,8 +121,11 @@ module.exports.renderEditForm = async (req, res) => {
         return res.redirect("/listings");
     }
 
-    let originalImageUrl = listing.image.url;
-    originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_200");
+    let originalImageUrl = listing.image?.url;
+
+    if (originalImageUrl) {
+        originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_200");
+    }
 
     res.render("listings/edit", {
         listing,
@@ -137,11 +147,12 @@ module.exports.updateListing = async (req, res) => {
         { new: true }
     );
 
-    if (typeof req.file !== "undefined") {
-        let url = req.file.path;
-        let filename = req.file.filename;
-
-        listing.image = { url, filename };
+    // IMAGE UPDATE SAFE
+    if (req.file) {
+        listing.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
         await listing.save();
     }
 

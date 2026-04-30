@@ -84,8 +84,7 @@ textarea{
                     </div>
 
                     <div class="host-badge">
-                        Hosted by <b><%= listing.owner.username %></b>
-                    </div>
+Hosted by <b><%= listing.owner?.username || "Unknown Host" %></b>                    </div>
 
                 </div>
 
@@ -248,8 +247,7 @@ textarea{
 
         <% } %>
 
-        <% if(currUser && listing.owner._id.equals(currUser._id)){ %>
-
+<% if(currUser && listing.owner && listing.owner._id && currUser._id && listing.owner._id.equals(currUser._id)){ %>
         <hr>
 
         <a href="/listings/<%=listing._id%>/edit"
