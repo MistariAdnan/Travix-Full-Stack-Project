@@ -53,6 +53,133 @@ const sampleListings = [{
         location: "Portland",
         country: "United States",
     },
+   
+    {
+        title: "Cozy City Room",
+        description: "Clean private room in city center with WiFi and workspace.",
+        image: {
+            filename: "room1",
+            url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"
+        },
+        price: 800,
+        location: "Mumbai",
+        country: "India"
+    },
+    {
+        title: "Modern Studio Room",
+        description: "Stylish studio for solo travelers and students.",
+        image: {
+            filename: "room2",
+            url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267"
+        },
+        price: 1200,
+        location: "Pune",
+        country: "India"
+    },
+
+    // =========================
+    // 🏔️ MOUNTAIN
+    // =========================
+    {
+        title: "Mountain Retreat",
+        description: "Unplug and unwind in this peaceful mountain cabin surrounded by nature.",
+        image: {
+            filename: "mountain1",
+            url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d"
+        },
+        price: 1000,
+        location: "Aspen",
+        country: "United States"
+    },
+    {
+        title: "Snow Peak Cottage",
+        description: "Beautiful snow mountain view cottage with cozy interiors.",
+        image: {
+            filename: "mountain2",
+            url: "https://images.unsplash.com/photo-1519681393784-d120267933ba"
+        },
+        price: 2500,
+        location: "Shimla",
+        country: "India"
+    },
+
+    // =========================
+    // 🏊 POOL
+    // =========================
+    {
+        title: "Luxury Pool Villa",
+        description: "Private villa with infinity pool and luxury interiors.",
+        image: {
+            filename: "pool1",
+            url: "https://imgs.search.brave.com/jaVf87uDDIlpHrnqfQXODU6PV9xM316VerIWzt7nSes/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvMTI3/MTU0OTEvcGV4ZWxz/LXBob3RvLTEyNzE1/NDkxLmpwZWc_YXV0/bz1jb21wcmVzcyZj/cz10aW55c3JnYiZk/cHI9MSZ3PTUwMA"
+        },
+        price: 5000,
+        location: "Goa",
+        country: "India"
+    },
+    {
+        title: "Beach Resort Pool Stay",
+        description: "Relax in a luxury resort with ocean view and private pool.",
+        image: {
+            filename: "pool2",
+            url: "https://imgs.search.brave.com/UfrBzDPWiLtZj-ZW7LuHtwAsUJ6ux6i0jBi0sVKu9rk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS1jZG4udHJpcGFk/dmlzb3IuY29tL21l/ZGlhL3Bob3RvLW8v/MWQvMDEvMjYvN2Qv/b3V0ZG9vci1wb29s/LW92ZXJsb29raW5n/LmpwZw"
+        },
+        price: 4500,
+        location: "Maldives",
+        country: "Maldives"
+    },
+
+    // =========================
+    // ⛺ CAMPING
+    // =========================
+    {
+        title: "Forest Camping Experience",
+        description: "Live in nature with tents, bonfire and trekking.",
+        image: {
+            filename: "camp1",
+            url: "https://imgs.search.brave.com/irQzw7B9HLeR3IciF14any0pJJPiWgRJrIUSUwfrtxY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMjQv/NjMxLzczOS9zbWFs/bC93YXRlcmZyb250/LWNhbXBpbmctc3Bv/dC1waG90by5qcGc"
+        },
+        price: 1500,
+        location: "Rishikesh",
+        country: "India"
+    },
+    {
+        title: "River Side Camping",
+        description: "Peaceful camping near river with beautiful view.",
+        image: {
+            filename: "camp2",
+            url: "https://imgs.search.brave.com/BmyONqPx6WmLutYHnj3dgjZ9FBROu4cJBO7i3lV_VME/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMjE1/MTkzNTkyNy9waG90/by9mYW1pbHktdGFs/a2luZy1hbmQtY2Ft/cGluZy1vbi10aGUt/YmVhY2guanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPUltMG5Y/ZFNtT09fUVpfd2R2/RXBaWFhWZG1tb01H/b0RoTU1QTDJOTjY2/czA9"
+        },
+        price: 1800,
+        location: "Kasol",
+        country: "India"
+    },
+
+    // =========================
+    // 🌆 CITIES
+    // =========================
+    {
+        title: "New York City Apartment",
+        description: "Modern apartment in heart of NYC with skyline view.",
+        image: {
+            filename: "city1",
+            url: "https://imgs.search.brave.com/ObqRENr3GNZm-Vlp717cwsIFcc2oyKX9AIUTg5fNXHo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjE5/MjI3NTI5MC9waG90/by91cmJhbi1hcmNo/aXRlY3R1cmUtd2l0/aC1oaXN0b3JpYy1i/dWlsZGluZ3MtYW5k/LWZpcmUtZXNjYXBl/cy1pbi1uZXcteW9y/ay1jaXR5LmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1wR1B6/NzlRWDBha0JobjNq/OGpONlhVeXdZWnUw/SFJQaVh0X2g1N1lX/UGtnPQ"
+        },
+        price: 7000,
+        location: "New York",
+        country: "United States"
+    },
+    {
+        title: "Tokyo City Stay",
+        description: "Experience Tokyo nightlife and modern city lifestyle.",
+        image: {
+            filename: "city2",
+            url: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26"
+        },
+        price: 6500,
+        location: "Tokyo",
+        country: "Japan"
+    },
     {
         title: "Beachfront Paradise",
         description: "Step out of your door onto the sandy beach. This beachfront condo offers the ultimate relaxation.",
@@ -321,7 +448,7 @@ const sampleListings = [{
         description: "Bright, minimalist living space with neutral tones and natural textures—for calm, comfortable stays.",
         image: {
             filename: "cozy_living_room",
-            url: "https://pixabay.com/photos/cozy-living-room-interior-3770125/",
+            url: "https://imgs.search.brave.com/4qYHClcmI_zwCdWWNlds2syfyln1p2wbkHzGazSrjmE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/bW9zLmNtcy5mdXR1/cmVjZG4ubmV0L0R5/TVNaU3VQbzdOSzZh/eUhTZVBMaTguanBn",
         },
         price: 1400,
         location: "San Diego",
@@ -332,7 +459,7 @@ const sampleListings = [{
         description: "Clean, cozy bedroom with wood accents and ambient lighting—perfect for rest and relaxation.",
         image: {
             filename: "modern_scandi_bedroom",
-            url: "https://www.pexels.com/photo/modern-bedroom-3201762/",
+            url: "https://imgs.search.brave.com/ChhNg5d3vHfA9mpL96yul3CmXLjsqOY4c-ZidN_95tU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTYy/NTEzODQ4NS9waG90/by9tb2Rlcm4tYmVk/cm9vbS1pbnRlcmlv/ci5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9T1Y5VlY2NXU2/UTNhc1dLanByVk9N/bk1BYVUzSVJONDU4/Wkw4MFdydkI3Yz0",
         },
         price: 1300,
         location: "Stockholm",
@@ -343,7 +470,7 @@ const sampleListings = [{
         description: "A warm, rustic loft flooded with sunshine—blend of comfort and historic charm.",
         image: {
             filename: "rustic_loft",
-            url: "https://pixabay.com/photos/loft-interior-design-room-floor-1836246/",
+            url: "https://imgs.search.brave.com/6KrehiMbQmf-rGeH_YKO4K_Kmyd5fhr-OMJAOtCEgfI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9zdW5s/aXQtbG9mdC1yb29t/LXRhbGwtYnJpY2st/d2FsbHMtZ3JlZW5o/b3VzZS1wbGFudHMt/dXJiYW4tbGl2aW5n/LWNvbmNlcHQtMzU4/MDc3MzgyLmpwZw",
         },
         price: 1250,
         location: "Portland",
@@ -354,7 +481,7 @@ const sampleListings = [{
         description: "Spacious, elegant living room with soft tones—relax or entertain in style.",
         image: {
             filename: "elegant_living_room",
-            url: "https://www.pexels.com/photo/elegant-living-room-1812897/",
+            url: "https://imgs.search.brave.com/3y2GepwPIBMxvCRwFKbxDI-1V4sSko3W63ZM0vxQQx4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dHJlbmRpci5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjUv/MTIvQ2xhc3NpYy1B/cmNoaXRlY3R1cmUt/Q29vbC1CbHVlLUNh/bG0tNTAweDM5MC5q/cGc",
         },
         price: 1550,
         location: "London",

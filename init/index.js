@@ -3,6 +3,9 @@ const Listing = require("../models/listing.js");
 const User = require("../models/user.js");
 const initData = require("./data.js");
 
+require("dotenv").config(); // 🔥 ADD THIS (IMPORTANT)
+const MONGO_URL = process.env.DB_URL;
+
 async function main() {
     await mongoose.connect(process.env.DB_URL);
 }

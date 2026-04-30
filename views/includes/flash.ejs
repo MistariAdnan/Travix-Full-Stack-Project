@@ -11,3 +11,19 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
 <% } %>
+
+<script>
+setTimeout(() => {
+    let alerts = document.querySelectorAll(".alert");
+
+    alerts.forEach(alert => {
+        alert.style.transition = "all 0.5s ease";
+        alert.style.opacity = "0";
+
+        setTimeout(() => {
+            alert.remove();
+        }, 500);
+    });
+
+}, 3000);
+</script>
