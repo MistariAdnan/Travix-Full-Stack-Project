@@ -24,7 +24,15 @@ const UserRouter = require("./routes/User.js");
 
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl = process.env.DB_URL;
+
+mongoose.connect(dbUrl)
+.then(() => {
+    console.log("MongoDB Connected ✅");
+})
+.catch((err) => {
+    console.log(err);
+});
 //to call function
 main().then(() => {
         console.log("connected to DB");
