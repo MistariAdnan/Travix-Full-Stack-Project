@@ -1,6 +1,8 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
+
+console.log("DB_URL:", process.env.DB_URL); // 👈 debug line
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -69,7 +71,9 @@ app.use((req, res, next) => {
     next();
 })
 
-
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
