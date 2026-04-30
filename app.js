@@ -26,13 +26,12 @@ const UserRouter = require("./routes/User.js");
 
 const dbUrl = process.env.DB_URL;
 
-mongoose.connect(dbUrl)
-.then(() => {
-    console.log("MongoDB Connected ✅");
+mongoose.connect(dbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
-.catch((err) => {
-    console.log(err);
-});
+.then(() => console.log("MongoDB Connected ✅"))
+.catch(err => console.log("DB Error:", err));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
