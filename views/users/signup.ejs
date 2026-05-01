@@ -1,28 +1,36 @@
 <% layout("layouts/boilerplate") %>
-    <div class="row mt-3">
-        <h1 class="col-6 offset-3">SignUp</h1>
-        <div class="col-6 offset-3">
-            <form action="/signup" method="POST" class="needs-validation" novalidate>
-                <div class="mb-3"><label for="username" class="form-label">UserName</label>
-                    <input name="username" id="username" type="text" class="form-control" required />
-                </div>
-                <div class="valid-feedback"> Looks Good!</div>
-                <div class="mb-3"><label for="email" class="form-label">Email</label>
-                    <input name="email" id="email" type="email" class="form-control" required />
-                </div>
-                    <!-- <input name="email" placeholder="Email" required> -->
 
-                <div class="mb-3"><label for="password" class="form-label">password</label>
-                    <input name="password" id="password" type="password" class="form-control" required />
-                </div>
-                <button class="btn btn-success">SignUp</button></form>
-        </div>
+<div class="row mt-3">
+    <h1 class="col-6 offset-3">Sign Up</h1>
 
-    <!-- <input name="username" placeholder="Username" required>
+    <div class="col-6 offset-3">
 
-    <input name="email" placeholder="Email" required>
+        <!-- GLOBAL ERROR -->
+      
+        <form action="/signup" method="POST" class="needs-validation" novalidate>
 
-    <input type="password" name="password" placeholder="Password" required> -->
+            <!-- USERNAME -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input name="username" id="username" type="text" class="form-control" required>
+                <div class="invalid-feedback">Please enter username</div>
+            </div>
 
+            <!-- EMAIL -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input name="email" id="email" type="email" class="form-control" required>
+                <div class="invalid-feedback">Enter valid email</div>
+            </div>
 
-</form>
+            <!-- PASSWORD -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input name="password" id="password" type="password" class="form-control" required>
+                <div class="invalid-feedback">Password is required</div>
+            </div>
+
+            <button class="btn btn-success">Sign Up</button>
+        </form>
+    </div>
+</div>
